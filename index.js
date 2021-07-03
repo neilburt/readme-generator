@@ -1,6 +1,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+// questions for Inquirer prompt method to gather information from user
 inquirer 
   .prompt([
 {
@@ -50,6 +51,8 @@ inquirer
   message: "Please enter your email address."
 }
 ])
+
+// table of contents formulation
 .then(function(responses){
   let table = `## Table of Contents\n`;
 
@@ -72,6 +75,7 @@ inquirer
     table += `- ### [Questions](#questions)\n`
   }
 
+// renders the Markdown language
   const readme =
 `# ${responses.title}  \n
 ![license badge](https://img.shields.io/badge/license-${responses.license}-orange)  \n
@@ -93,6 +97,7 @@ If you have any additional questions:  \n
 Visit my [GitHub profile](https://github.com/${responses.github}).  \n
 Or you can [email me](mailto:${responses.email}).`
 
+  // produces the actual README.md
   fs.writeFile("README.md", readme, (error) => {
     if(error){console.log(error)}
     else{console.log("Your README is complete.")}
